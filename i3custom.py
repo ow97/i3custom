@@ -17,10 +17,10 @@ class CustomHandler(i3ipc.Connection):
 
     ::
 
-        bindsym $Mod+h #show_history
         bindsym $Mod+h nop; #show_history
         bindsym $Mod+h workspace History; #show_history
-        bindsym $Mod+h #show_history; workspace History
+        bindsym $Mod+h mode default; #show_history; workspace History
+        bindsym $Mod+h workspace History; #show_history; mode default
     """
 
     def __init__(self):

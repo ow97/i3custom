@@ -20,3 +20,19 @@ derived from `i3ipc.Connection`. This class overrides the `on` and `command`
 methods to allow for the registration and execution of custom functionality.
 
 For an example usage see `commands/workspace_toggle.py`.
+
+## Calling your custom commands
+
+Custom command names must be called with a preceding '#' from the i3 config.
+For example, one may register a handler for the ``show_history`` custom
+command, this could then be bound to a key combination with any of the
+following lines in the i3 config file:
+
+    bindsym $Mod+h nop; #show_history
+    bindsym $Mod+h workspace History; #show_history
+    bindsym $Mod+h mode default; #show_history; workspace History
+    bindsym $Mod+h workspace History; #show_history; mode default 
+
+Notice that the first command invoked must be a native one, so if only a custom
+command is to be executed after a key press then `nop` should be used as the 
+first command in a chain.
