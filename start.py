@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Open a new custom handler connection to i3 and register the desired custom
 functionality with the handler
