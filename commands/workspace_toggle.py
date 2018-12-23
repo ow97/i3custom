@@ -14,6 +14,8 @@ class WorkspaceHistoryToggle:
         current_workspace = handler.get_tree().find_focused().workspace().name
         self.workspace_history.appendleft(current_workspace)
 
+        self.last_history_distance = 1
+
         self.handler = handler
 
         # Keep track of our workspace history
@@ -38,12 +40,17 @@ class WorkspaceHistoryToggle:
         assert args[0].strip() == "workspace_toggle"
 
         try:
-            self.toggle(int(args[1]))
+            if len(args) == 1:
+                history_distance = self.last_history_distance
+            else:
+                history_distance = int(args[1])
         except ValueError as err:
             raise ValueError(
                 "While parsing workspace_toggle args, expected an int but got "
                 "'" + args[1] + "'"
-            )
+            ) from err
+
+        self.toggle(history_distance)
 
     def toggle(self, history_distance):
         """
@@ -54,6 +61,8 @@ class WorkspaceHistoryToggle:
             # Get and delete the relevant history item
             previous_workspace = self.workspace_history[history_distance]
             del self.workspace_history[history_distance]
+
+            self.last_history_distance = history_distance
 
             # Switch back to the previous workspace
             self.handler.command('workspace "' + previous_workspace + '"')
