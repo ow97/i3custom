@@ -24,14 +24,14 @@ For an example usage see `commands/workspace_toggle.py`.
 ## Calling your custom commands
 
 Custom command names must be called with a preceding '#' from the i3 config.
-For example, one may register a handler for the ``show_history`` custom
+For example, one may register a handler for the ``#workspace_toggle`` custom
 command, this could then be bound to a key combination with any of the
 following lines in the i3 config file:
 
-    bindsym $Mod+h nop; #show_history
-    bindsym $Mod+h workspace History; #show_history
-    bindsym $Mod+h mode default; #show_history; workspace History
-    bindsym $Mod+h workspace History; #show_history; mode default 
+    bindsym $Mod+h nop; #workspace_toggle
+    bindsym $Mod+h workspace History; #workspace_toggle
+    bindsym $Mod+h mode default; #workspace_toggle; workspace History
+    bindsym $Mod+h workspace History; #workspace_toggle; mode default 
 
 Notice that the first command invoked must be a native one, so if only a custom
 command is to be executed after a key press then `nop` should be used as the 
